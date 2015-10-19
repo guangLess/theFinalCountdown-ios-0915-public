@@ -16,6 +16,7 @@
 
 
 #import "FISViewController.h"
+#import <DKCircleButton.h>
 
 @interface FISViewController ()
 
@@ -31,8 +32,6 @@
 @property(nonatomic) NSUInteger x;
 
 
--(IBAction)timerPicker:(id)sender;
-
 @end
 
 @implementation FISViewController
@@ -40,36 +39,37 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.date = [NSDate date];
-    [self.startButton setTitle:@"START" forState:UIControlStateNormal];
+    [self.startButton setTitle:@"Start" forState:UIControlStateNormal];
     self.timeLabel.text = self.timerDisplay;
-
 }
 
 
 -(IBAction)startButton:(id)sender{
     
     self.timePicker.hidden = YES;
-    [self.startButton setTitle:@"Cancel" forState:UIControlStateNormal];
-    self.pauseButton.hidden = NO;
-    self.pauseButton.enabled = YES;
-    
-    self.interval = self.timePicker.countDownDuration;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                     target:self
-                                   selector:@selector(startTimer)
-                                   userInfo:nil
-                                    repeats:YES];
-    
-    
-    
-    
-    
-    
-    
-    
-    //NSLog(@"Timer>>%f",self.interval);
+    if ([self.startButton.titleLabel.text isEqualToString: @"Cancel"]) {
+        
+        [self.timer invalidate];
+        self.interval = 0;
+        self.timeLabel.hidden = YES;
+        self.timePicker.hidden = NO;
+        [self.startButton setTitle:@"Start" forState:UIControlStateNormal];
+        
+    } else {
+        
+        self.timeLabel.hidden = NO;
+        [self.startButton setTitle:@"Cancel" forState:UIControlStateNormal];
+        self.pauseButton.hidden = NO;
+        self.pauseButton.enabled = YES;
+        
+        self.interval = self.timePicker.countDownDuration;
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                      target:self
+                                                    selector:@selector(startTimer)
+                                                    userInfo:nil
+                                                     repeats:YES];
+    }
 
 }
 
@@ -90,68 +90,18 @@
     return self.timerDisplay;
 }
 
-
-
-
 -(IBAction)pauseButton:(id)sender{
     
     self.date = nil;
-    [self.startButton setTitle:@"start" forState:UIControlStateNormal];
     [self.timer invalidate];
-    //self.x = 0;
-    //self.interval = self.timePicker.countDownDuration;
-    
+
 }
-
-
-- (IBAction)timerPicker:(id)sender {
-    
-    //NSDateFormatter *timerFormat = [[NSDateFormatter alloc] init];
-    
-    //NSString * formatedTime = self.
-    
-    
-    /*
-
-     
-     NSDate *pickerDate = [_datePicker date];
-     NSString *selectionString = [[NSString alloc]
-     initWithFormat:@"%@",
-     [pickerDate descriptionWithLocale:usLocale]];
-     _dateLabel.text = selectionString;
-     
-     */
-    
-    /*
-    self.timePicker.datePickerMode = UIDatePickerModeCountDownTimer;
-    self.interval = 10.0;
-    self.timePicker.countDownDuration = self.interval;
-    NSLog(@"Test the timer %f",self.timePicker.countDownDuration);
-    
-    [self.timePicker addTarget:self
-                          action:@selector(timerTest)
-                forControlEvents:UIControlEventValueChanged];
-    
-    
-    */
-    
-    
-    //self.timePicker.date;
-    //[self.date description];
-    
-}
-
-
-
 
 -(void)timerTest{
     
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    //lf.date = [NSDate date];
     [calendar components:(NSCalendarUnitHour | NSCalendarUnitSecond) fromDate:self.date];
-
-    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                      target:self
                                    selector:@selector(startTimer)
@@ -160,7 +110,17 @@
 }
 
 
-
-
+-(void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
+    
+    UIDeviceOrientation currentOrientation = [[UIDevice currentDevice] orientation];
+    if (UIDeviceOrientationIsLandscape(currentOrientation)) {
+        self.startButton.hidden  = YES;
+        self.pauseButton.hidden = YES;
+    }    
+}
 
 @end
+
+
+
+

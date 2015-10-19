@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--timer test-->
@@ -18,8 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" countDownDuration="1" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="t0q-ZD-j8N">
-                                <rect key="frame" x="0.0" y="64" width="375" height="160"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" countDownDuration="1" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="t0q-ZD-j8N">
+                                <rect key="frame" x="0.0" y="64" width="375" height="334"/>
                                 <animations/>
                                 <date key="date" timeIntervalSinceReferenceDate="426600068.10878801">
                                     <!--2014-07-09 12:01:08 +0000-->
@@ -28,25 +29,13 @@
                                     <action selector="timerPicker:" destination="vXZ-lx-hvc" eventType="valueChanged" id="Wzy-Cc-WT6"/>
                                 </connections>
                             </datePicker>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="123" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACg-uO-YjG">
-                                <rect key="frame" x="0.0" y="217" width="320" height="156"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="156" id="jnT-yN-la4"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Symbol" family="Symbol" pointSize="51"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="Uu0-MS-lh5">
-                                <rect key="frame" x="40" y="398" width="230" height="60"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="Uu0-MS-lh5">
+                                <rect key="frame" x="72" y="529" width="230" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5g-VY-d7z">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5g-VY-d7z" customClass="DKCircleButton">
                                         <rect key="frame" x="0.0" y="0.0" width="75" height="60"/>
                                         <animations/>
                                         <color key="backgroundColor" red="0.48812308549558187" green="0.93824968434343436" blue="0.91093244360197134" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="TDv-8p-1pg"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <state key="normal">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -75,16 +64,26 @@
                                 </subviews>
                                 <animations/>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVJ-Gn-wrT">
+                                <rect key="frame" x="0.0" y="64" width="375" height="334"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="t0q-ZD-j8N" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="0n5-kg-KoE"/>
-                            <constraint firstItem="ACg-uO-YjG" firstAttribute="trailing" secondItem="t0q-ZD-j8N" secondAttribute="trailing" id="6wu-1j-pCa"/>
-                            <constraint firstItem="Uu0-MS-lh5" firstAttribute="top" secondItem="ACg-uO-YjG" secondAttribute="bottom" constant="25" id="KZw-aN-2ol"/>
-                            <constraint firstItem="ACg-uO-YjG" firstAttribute="leading" secondItem="t0q-ZD-j8N" secondAttribute="leading" id="ZOI-54-e9v"/>
+                            <constraint firstAttribute="trailing" secondItem="SVJ-Gn-wrT" secondAttribute="trailing" id="1pe-bK-eht"/>
+                            <constraint firstItem="SVJ-Gn-wrT" firstAttribute="top" secondItem="t0q-ZD-j8N" secondAttribute="top" id="8sw-os-ouW"/>
+                            <constraint firstItem="SVJ-Gn-wrT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Fxm-Fd-gGZ"/>
+                            <constraint firstItem="t0q-ZD-j8N" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="H7h-oS-0gg"/>
+                            <constraint firstItem="t0q-ZD-j8N" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Jbp-re-pq2"/>
+                            <constraint firstItem="SVJ-Gn-wrT" firstAttribute="bottom" secondItem="t0q-ZD-j8N" secondAttribute="bottom" id="NaG-wu-Plp"/>
+                            <constraint firstItem="t0q-ZD-j8N" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" multiplier="0.5" id="bgK-Fz-g7G"/>
                             <constraint firstItem="Uu0-MS-lh5" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="dDo-4j-Xzp"/>
-                            <constraint firstItem="ACg-uO-YjG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="gNx-ow-plB"/>
                             <constraint firstItem="Uu0-MS-lh5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="20" id="oTl-gZ-0Ex"/>
                             <constraint firstItem="t0q-ZD-j8N" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="qqo-91-Ksn"/>
                         </constraints>
@@ -94,7 +93,7 @@
                     <connections>
                         <outlet property="pauseButton" destination="G61-zh-9P3" id="yTr-Wg-ZQz"/>
                         <outlet property="startButton" destination="e5g-VY-d7z" id="BIj-P7-eJE"/>
-                        <outlet property="timeLabel" destination="ACg-uO-YjG" id="opy-oR-1U6"/>
+                        <outlet property="timeLabel" destination="SVJ-Gn-wrT" id="qnc-Hj-ocq"/>
                         <outlet property="timePicker" destination="t0q-ZD-j8N" id="uCe-TQ-Ktf"/>
                     </connections>
                 </viewController>
